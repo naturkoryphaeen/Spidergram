@@ -1,0 +1,1022 @@
+% Package for creating spidergrams.
+% Implemented by Carsten Schulz (koryphaeen@posteo.net).
+% (c) 2026 Carsten Schulz
+% Version: 0.3, 2026-07-04.
+% Change Log:
+% Version: 0.1, 2026-07-03
+% added 5 languages of base method from Aeres Hogeschool
+% Version: 0.2
+% added 26 languages without concern to typography
+% 45 more translations to-do
+
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{spidergram}[2026/07/03 package spidergram]
+\RequirePackage{tikz}
+\RequirePackage{etoolbox}
+
+% Fall back to english if option parsing fails
+\def\INV@lang{eng}
+
+% Language options
+\DeclareOption{romanian}{\def\INV@lang{ro}}
+\DeclareOption{english}{\def\INV@lang{en}}
+\DeclareOption{croatian}{\def\INV@lang{hr}}
+\DeclareOption{german}{\def\INV@lang{de}}
+\DeclareOption{dutch}{\def\INV@lang{nl}}
+\DeclareOption{french}{\def\INV@lang{fr}}
+\DeclareOption{spanish}{\def\INV@lang{es}}
+\DeclareOption{finnish}{\def\INV@lang{fi}}
+\DeclareOption{italian}{\def\INV@lang{it}}
+\DeclareOption{latin}{\def\INV@lang{la}}
+\DeclareOption{latvian}{\def\INV@lang{lv}}
+\DeclareOption{lithuanian}{\def\INV@lang{lt}}
+\DeclareOption{armenian}{\def\INV@lang{am}}
+\DeclareOption{kyrgyz}{\def\INV@lang{ky}}
+\DeclareOption{persian}{\def\INV@lang{fa}}
+\DeclareOption{chinese}{\def\INV@lang{zn}}
+\DeclareOption{japanese}{\def\INV@lang{ja}}
+\DeclareOption{korean}{\def\INV@lang{ko}}
+\DeclareOption{frisian}{\def\INV@lang{fy}}
+\DeclareOption{icelandic}{\def\INV@lang{is}}
+\DeclareOption{swedish}{\def\INV@lang{sv}}
+\DeclareOption{norwegian}{\def\INV@lang{no}}
+\DeclareOption{bosnian}{\def\INV@lang{bs}}
+\DeclareOption{serbian}{\def\INV@lang{sr}}
+\DeclareOption{swedish}{\def\INV@lang{sv}}
+\DeclareOption{danish}{\def\INV@lang{da}}
+\DeclareOption{estonian}{\def\INV@lang{et}}
+\DeclareOption{luxembourgish}{\def\INV@lang{lb}}
+\DeclareOption{panjabi}{\def\INV@lang{pa}}
+\DeclareOption{esperanto}{\def\INV@lang{eo}}
+\DeclareOption{hindi}{\def\INV@lang{hi}}
+
+\DeclareOption{czech}{\def\INV@lang{cs}}
+\DeclareOption{slovak}{\def\INV@lang{sk}}
+\DeclareOption{slovenian}{\def\INV@lang{sl}}
+\DeclareOption{polish}{\def\INV@lang{pl}}
+\DeclareOption{hungarian}{\def\INV@lang{hu}}
+\DeclareOption{greek}{\def\INV@lang{el}}
+\DeclareOption{portuguese}{\def\INV@lang{pt}}
+\DeclareOption{irish}{\def\INV@lang{ga}}
+\DeclareOption{welsh}{\def\INV@lang{cy}}
+\DeclareOption{maltese}{\def\INV@lang{mt}}
+\DeclareOption{albanian}{\def\INV@lang{sq}}
+\DeclareOption{belarusian}{\def\INV@lang{be}}
+\DeclareOption{ukrainian}{\def\INV@lang{uk}}
+\DeclareOption{russian}{\def\INV@lang{ru}}
+\DeclareOption{macedonian}{\def\INV@lang{mk}}
+
+\DeclareOption{arabic}{\def\INV@lang{ar}}
+\DeclareOption{hebrew}{\def\INV@lang{he}}
+\DeclareOption{turkish}{\def\INV@lang{tr}}
+\DeclareOption{azerbaijani}{\def\INV@lang{az}}
+\DeclareOption{kazakh}{\def\INV@lang{kk}}
+\DeclareOption{uzbek}{\def\INV@lang{uz}}
+\DeclareOption{tajik}{\def\INV@lang{tg}}
+\DeclareOption{georgian}{\def\INV@lang{ka}}
+
+\DeclareOption{bengali}{\def\INV@lang{bn}}
+\DeclareOption{urdu}{\def\INV@lang{ur}}
+\DeclareOption{tamil}{\def\INV@lang{ta}}
+\DeclareOption{telugu}{\def\INV@lang{te}}
+\DeclareOption{marathi}{\def\INV@lang{mr}}
+\DeclareOption{gujarati}{\def\INV@lang{gu}}
+\DeclareOption{kannada}{\def\INV@lang{kn}}
+\DeclareOption{malayalam}{\def\INV@lang{ml}}
+\DeclareOption{sinhala}{\def\INV@lang{si}}
+\DeclareOption{nepali}{\def\INV@lang{ne}}
+
+\DeclareOption{thai}{\def\INV@lang{th}}
+\DeclareOption{vietnamese}{\def\INV@lang{vi}}
+\DeclareOption{indonesian}{\def\INV@lang{id}}
+\DeclareOption{malay}{\def\INV@lang{ms}}
+\DeclareOption{filipino}{\def\INV@lang{tl}}
+\DeclareOption{mongolian}{\def\INV@lang{mn}}
+
+\DeclareOption{swahili}{\def\INV@lang{sw}}
+\DeclareOption{afrikaans}{\def\INV@lang{af}}
+\DeclareOption{zulu}{\def\INV@lang{zu}}
+\DeclareOption{xhosa}{\def\INV@lang{xh}}
+\DeclareOption{ithkuil1}{\def\INV@lang{il}}
+
+
+\ProcessOptions
+
+% Translations
+\def\INV@text@soil@en {Soil}
+\def\INV@text@crophealth@en {Crop Health}
+\def\INV@text@horsehealth@en {Horse Health}
+\def\INV@text@foodproduction@en {Food production}
+\def\INV@text@forage@en {Forage}
+\def\INV@text@energyconsumption@en {Energy consumption}
+\def\INV@text@energysources@en {Energy sources}
+\def\INV@text@water@en {Water}
+\def\INV@text@nutrientcycle@en {Nutrient cycle}
+\def\INV@text@materialcycle@en {Material cycle}
+\def\INV@text@materialuse@en {Material use}
+\def\INV@text@airquality@en {Air quality}
+\def\INV@text@biodiversity@en {Biodiversity}
+\def\INV@text@regionallandscape@en {Regional landscape}
+\def\INV@text@farmersincome@en {Farmer's income}
+\def\INV@text@entrepreneursincome@en {Farmer's income}
+\def\INV@text@foodwithidentity@en {Food with identity}
+\def\INV@text@identity@en {Identity}
+\def\INV@text@animalwelfare@en {Animal welfare}
+\def\INV@text@horsewelfare@en {Horse welfare}
+\def\INV@text@farmercitizen@en {Farmer-citizen}
+\def\INV@text@entrepreneurcitizen@en {Entrepreneur-citizen}
+\def\INV@text@farmervaluechain@en {Farmer-value chain}
+\def\INV@text@entrepreneurvaluechain@en {Entrepreneur-value chain}
+\def\INV@text@jobsatisfactionemployer@en {Jobs satisfaction employer}
+\def\INV@text@jobsatisfactionemployees@en {Jobs satisfaction employees}
+
+\def\INV@text@soil@de {Boden}
+\def\INV@text@crophealth@de {Pflanzengesundheit}
+\def\INV@text@horsehealth@de {Pferdegesundheit}
+\def\INV@text@foodproduction@de {Lebensmittelproduktion}
+\def\INV@text@forage@de {Pferdefutter}
+\def\INV@text@energyconsumption@de {Energieverbrauch}
+\def\INV@text@energysources@de {Energieherkunft}
+\def\INV@text@water@de {Wasser}
+\def\INV@text@nutrientcycle@de {N\"{a}hrstoffkreislauf}
+\def\INV@text@materialcycle@de {Materialkreislauf}
+\def\INV@text@materialuse@de {Materialverbrauch}
+\def\INV@text@airquality@de {Luftqualit\"{a}t}
+\def\INV@text@biodiversity@de {Biodiversit\"{a}t}
+\def\INV@text@regionallandscape@de {Regionale Landschaft}
+\def\INV@text@farmersincome@de {Einkommen der Landwirte}
+\def\INV@text@entrepreneursincome@de {Einkommen der Unternehmer}
+\def\INV@text@foodwithidentity@de {Lebensmittel mit Identit\"{a}t}
+\def\INV@text@identity@de {Identit\"{a}t}
+\def\INV@text@animalwelfare@de {Tierwohl}
+\def\INV@text@horsewelfare@de {Pferdewohl}
+\def\INV@text@farmercitizen@de {Landwirt-B\"urger}
+\def\INV@text@entrepreneurcitizen@de {Unternehmer und B\"urger}
+\def\INV@text@farmervaluechain@de {Landwirt-Wertsch\"{o}pfungskette}
+\def\INV@text@entrepreneurvaluechain@de {Unternehmer Wertsch\"{o}pfungskette}
+\def\INV@text@jobsatisfactionemployer@de {Arbeitsfreude des Unternehmers}
+\def\INV@text@jobsatisfactionemployees@de {Arbeitsfreude der Mitarbeiter}
+
+
+\def\INV@text@soil@hr {Tlo}
+\def\INV@text@crophealth@hr {Zdravje usjeva}
+\def\INV@text@horsehealth@hr {Zdravje konja}
+\def\INV@text@foodproduction@hr {Proivodnja hrane}
+\def\INV@text@forage@hr {Krmiva}
+\def\INV@text@energyconsumption@hr {Potrosnja energije}
+\def\INV@text@energysources@hr {Izvor energije}
+\def\INV@text@water@hr {Voda}
+\def\INV@text@nutrientcycle@hr {Krug hranjivih tvari}
+\def\INV@text@materialcycle@hr {Materijalni ciklus}
+\def\INV@text@materialuse@hr {Upotreba materijala}
+\def\INV@text@airquality@hr {Kvaliteta zraka}
+\def\INV@text@biodiversity@hr {Biodiverzitet}
+\def\INV@text@regionallandscape@hr {Regionalni krajolik}
+\def\INV@text@farmersincome@hr {Prihodi poljoprivrednika}
+\def\INV@text@entrepreneursincome@hr {Prihod poduzetnika}
+\def\INV@text@foodwithidentity@hr {Hrana s identitetom}
+\def\INV@text@identity@hr {Identitet}
+\def\INV@text@animalwelfare@hr {Dobrobiti zivotinja}
+\def\INV@text@horsewelfare@hr {Dobrobit konja}
+\def\INV@text@farmercitizen@hr {Poljoprivrednik-gradanin}
+\def\INV@text@entrepreneurcitizen@hr {Poduzetnik - gradanin}
+\def\INV@text@farmervaluechain@hr {Poljoprivrednik-Vrijednosti lanac}
+\def\INV@text@entrepreneurvaluechain@hr {Poduzetnik-lanac vrijednosti}
+\def\INV@text@jobsatisfactionemployer@hr {Zadovoljstvo poslom poduzetnika}
+\def\INV@text@jobsatisfactionemployees@hr {Zadovoljstvo poslom za zaposlenike}
+
+\def\INV@text@soil@sv{Jord }
+\def\INV@text@crophealth@sv{Grödors hälsa }
+\def\INV@text@horsehealth@sv{Hästarnas hälsa }
+\def\INV@text@foodproduction@sv{Livsmedelsproduktion }
+\def\INV@text@forage@sv{Vallfoder }
+\def\INV@text@energyconsumption@sv{Energiförbrukning }
+\def\INV@text@energysources@sv{Energikällor }
+\def\INV@text@water@sv{Vatten }
+\def\INV@text@nutrientcycle@sv{Näringscykeln }
+\def\INV@text@materialcycle@sv{Materialcykeln }
+\def\INV@text@materialuse@sv{Materialanvändning }
+\def\INV@text@airquality@sv{Luftkvalitet }
+\def\INV@text@biodiversity@sv{Biologisk mångfald }
+\def\INV@text@regionallandscape@sv{Regionalt landskap}
+\def\INV@text@farmersincome@sv{Bondbrukarens inkomst}
+\def\INV@text@entrepreneursincome@sv{Bondbrukarens inkomst }
+\def\INV@text@foodwithidentity@sv{Mat med identitet }
+\def\INV@text@identity@sv{Identitet }
+\def\INV@text@animalwelfare@sv{Djurvälfärd }
+\def\INV@text@horsewelfare@sv{Hästvälfärd }
+\def\INV@text@farmercitizen@sv{Bonde-medborgare }
+\def\INV@text@entrepreneurcitizen@sv{Entreprenör-medborgare }
+\def\INV@text@farmervaluechain@sv{Bonde-värdekedja }
+\def\INV@text@entrepreneurvaluechain@sv{Entreprenör-värdekedja }
+\def\INV@text@jobsatisfactionemployer@sv{Arbetstillfredsställelse arbetsgivare }
+\def\INV@text@jobsatisfactionemployees@sv{Arbetstillfredsställelse anställda}
+
+
+\def\INV@text@soil@nl {Bodem}
+\def\INV@text@crophealth@nl {Gewasgezondheid}
+\def\INV@text@horsehealth@nl {Paardgezpndheid}
+\def\INV@text@foodproduction@nl {Voedselproductie}
+\def\INV@text@forage@nl {Foerage}
+\def\INV@text@energyconsumption@nl {Energie verbruik}
+\def\INV@text@energysources@nl {Energie herkomst}
+\def\INV@text@water@nl {Water}
+\def\INV@text@nutrientcycle@nl {Nutrientenkringloop}
+\def\INV@text@materialcycle@nl {Materiaalkringloop}
+\def\INV@text@materialuse@nl {Materiaalgebruik}
+\def\INV@text@airquality@nl {Luchtkwaliteit}
+\def\INV@text@biodiversity@nl {Biodiversiteit}
+\def\INV@text@regionallandscape@nl {Streekeigen landschap}
+\def\INV@text@farmersincome@nl {Boereninkomen}
+\def\INV@text@entrepreneursincome@nl {Inkomen ondernemer}
+\def\INV@text@foodwithidentity@nl {Voedsel met identiteit}
+\def\INV@text@identity@nl {Identiteit}
+\def\INV@text@animalwelfare@nl {Dierenwelzijn}
+\def\INV@text@horsewelfare@nl {Paardenwelzijn}
+\def\INV@text@farmercitizen@nl {Boer-burger}
+\def\INV@text@entrepreneurcitizen@nl {Ondernemer-burger}
+\def\INV@text@farmervaluechain@nl {Boer-waardeketen}
+\def\INV@text@entrepreneurvaluechain@nl {Ondernemer-Waardeketen}
+\def\INV@text@jobsatisfactionemployer@nl {Arbeitsvreugd ondernemer}
+\def\INV@text@jobsatisfactionemployees@nl {Arbeitsvreugd medewerkers}
+
+
+\def\INV@text@soil@ro {Solul}
+\def\INV@text@crophealth@ro {Sănătatea culturilor}
+\def\INV@text@horsehealth@ro {Sănătatea calului}
+\def\INV@text@foodproduction@ro {Producția alimentară}
+\def\INV@text@forage@ro {Furaje}
+\def\INV@text@energyconsumption@ro {Consumul de Energie}
+\def\INV@text@energysources@ro {Provenientia Energie}
+\def\INV@text@water@ro {Apa}
+\def\INV@text@nutrientcycle@ro {Ciclul nutrienților}
+\def\INV@text@materialcycle@ro {Ciclul materialelor}
+\def\INV@text@materialuse@ro {Utilizarea materialelor}
+\def\INV@text@airquality@ro {Calitatea aerului}
+\def\INV@text@biodiversity@ro {Biodiversitatea}
+\def\INV@text@regionallandscape@ro {Peisajul specific regiunii}
+\def\INV@text@farmersincome@ro {Venitul fermierilor}
+\def\INV@text@entrepreneursincome@ro {Venitul antreprenorului}
+\def\INV@text@foodwithidentity@ro {Alimente cu identitate}
+\def\INV@text@identity@ro {Identitate}
+\def\INV@text@animalwelfare@ro {Bunăstarea animalelor}
+\def\INV@text@horsewelfare@ro {Bunăstarea cailor}
+\def\INV@text@farmercitizen@ro {Fermier-Cetățean}
+\def\INV@text@entrepreneurcitizen@ro {Antreprenor-Cetățean}
+\def\INV@text@farmervaluechain@ro {Fermier-Lanț valoric}
+\def\INV@text@entrepreneurvaluechain@ro {Antreprenorul si lantul valoric}
+\def\INV@text@jobsatisfactionemployer@ro {Satisfactia la locul de munca a antreprenorului}
+\def\INV@text@jobsatisfactionemployees@ro {Bucuria muncii angajatilor}
+
+
+\def\INV@text@soil@fa{khak}
+\def\INV@text@crophealth@fa{salamet mahsulat keshavarzi}
+\def\INV@text@horsehealth@fa{salamet asb}
+\def\INV@text@foodproduction@fa{tolid movad ghzayi}
+\def\INV@text@forage@fa{aloofeh}
+\def\INV@text@energyconsumption@fa{masraf enrzhi}
+\def\INV@text@energysources@fa{menabe enrzhi}
+\def\INV@text@water@fa{ab}
+\def\INV@text@nutrientcycle@fa{charkheh movad moghzi}
+\def\INV@text@materialcycle@fa{charkheh movad}
+\def\INV@text@materialuse@fa{estefadeh az movad}
+\def\INV@text@airquality@fa{kifit npava}
+\def\INV@text@biodiversity@fa{tano zisti}
+\def\INV@text@regionallandscape@fa{chesham andaz mantegheh i}
+\def\INV@text@farmersincome@fa{daramad keshavarz}
+\def\INV@text@entrepreneursincome@fa{daramad keshavarz}
+\def\INV@text@foodwithidentity@fa{ghza ba}
+\def\INV@text@identity@fa{npavit}
+\def\INV@text@animalwelfare@fa{rafah heyvanat}
+\def\INV@text@horsewelfare@fa{rafah asb}
+\def\INV@text@farmercitizen@fa{keshavarz-sheharvand}
+\def\INV@text@entrepreneurcitizen@fa{karafarin-sheharvand}
+\def\INV@text@farmervaluechain@fa{keshavarz-zanjireh arzesh}
+\def\INV@text@entrepreneurvaluechain@fa{karafarin-zanjireh arzesh}
+\def\INV@text@jobsatisfactionemployer@fa{rezayat shghli karafarma}
+\def\INV@text@jobsatisfactionemployees@fa{rezayat shghli karmandan}
+
+\def\INV@text@soil@et{Muld }
+\def\INV@text@crophealth@et{Põllukultuuride tervis }
+\def\INV@text@horsehealth@et{Hobuste tervis }
+\def\INV@text@foodproduction@et{Toidutootmine }
+\def\INV@text@forage@et{Sööt }
+\def\INV@text@energyconsumption@et{Energiatarbimine }
+\def\INV@text@energysources@et{Energiaallikad }
+\def\INV@text@water@et{Vesi }
+\def\INV@text@nutrientcycle@et{Toitainete ringkäik }
+\def\INV@text@materialcycle@et{Materjalitsükkel }
+\def\INV@text@materialuse@et{Materjalikasutus }
+\def\INV@text@airquality@et{Õhukvaliteet }
+\def\INV@text@biodiversity@et{Bioloogiline mitmekesisus }
+\def\INV@text@regionallandscape@et{Regionaalne maastik }
+\def\INV@text@farmersincome@et{Põllumehe sissetulek }
+\def\INV@text@entrepreneursincome@et{Põllumehe sissetulek }
+\def\INV@text@foodwithidentity@et{Toit koos identiteediga }
+\def\INV@text@identity@et{Identiteediga }
+\def\INV@text@animalwelfare@et{Loomade heaolu }
+\def\INV@text@horsewelfare@et{Hobuste heaolu }
+\def\INV@text@farmercitizen@et{Põllumees-kodanik }
+\def\INV@text@entrepreneurcitizen@et{Ettevõtja-kodanik }
+\def\INV@text@farmervaluechain@et{Põllumees-väärtusahel }
+\def\INV@text@entrepreneurvaluechain@et{Ettevõtja-väärtusahel }
+\def\INV@text@jobsatisfactionemployer@et{Töötajate rahulolu }
+\def\INV@text@jobsatisfactionemployees@et{Töötajate rahulolu}
+
+
+\def\INV@text@soil@da{Jord }
+\def\INV@text@crophealth@da{Grödors hälsa }
+\def\INV@text@horsehealth@da{Hästens hälsa }
+\def\INV@text@foodproduction@da{Livsmedelsproduktion }
+\def\INV@text@forage@da{Vallfoder }
+\def\INV@text@energyconsumption@da{Energiförbrukning }
+\def\INV@text@energysources@da{Energikällor }
+\def\INV@text@water@da{Vatten }
+\def\INV@text@nutrientcycle@da{Näringscykeln }
+\def\INV@text@materialcycle@da{Materialcykeln }
+\def\INV@text@materialuse@da{Materialanvändning }
+\def\INV@text@airquality@da{Luftkvalitet }
+\def\INV@text@biodiversity@da{Biologisk mångfald }
+\def\INV@text@regionallandscape@da{Regionalt landskap}
+\def\INV@text@farmersincome@da{Bondbrukarens inkomst}
+\def\INV@text@entrepreneursincome@da{Bondbrukarens inkomst }
+\def\INV@text@foodwithidentity@da{Mat med identitet }
+\def\INV@text@identity@da{Identitet }
+\def\INV@text@animalwelfare@da{Djurens välfärd }
+\def\INV@text@horsewelfare@da{Hästens välfärd }
+\def\INV@text@farmercitizen@da{Bonde-medborgare }
+\def\INV@text@entrepreneurcitizen@da{Entreprenör-medborgare }
+\def\INV@text@farmervaluechain@da{Bonde-värdekedja }
+\def\INV@text@entrepreneurvaluechain@da{Entreprenör-värdekedja }
+\def\INV@text@jobsatisfactionemployer@da{Arbetstillfredsställelse arbetsgivare }
+\def\INV@text@jobsatisfactionemployees@da{Arbetstillfredsställelse anställda}
+
+
+\def\INV@text@soil@zn{T?r?ng}
+\def\INV@text@crophealth@zn{zuòwù jiànk?ng}
+\def\INV@text@horsehealth@zn{m?p? jiànk?ng}
+\def\INV@text@foodproduction@zn{shíp?n sh?ngch?n}
+\def\INV@text@forage@zn{sì c?o}
+\def\INV@text@energyconsumption@zn{néng hào}
+\def\INV@text@energysources@zn{néngyuán láiyuán}
+\def\INV@text@water@zn{shu?}
+\def\INV@text@nutrientcycle@zn{y?ngfèn xúnhuán}
+\def\INV@text@materialcycle@zn{wùzhí xúnhuán}
+\def\INV@text@materialuse@zn{wùzhí lìyòng}
+\def\INV@text@airquality@zn{k?ngqì zhí liàng}
+\def\INV@text@biodiversity@zn{sh?ngwù du?yàng xìng}
+\def\INV@text@regionallandscape@zn{q?yù j?nggu?n}
+\def\INV@text@farmersincome@zn{nóngmín sh?urù}
+\def\INV@text@entrepreneursincome@zn{nóngmín sh?urù}
+\def\INV@text@foodwithidentity@zn{jùy?u tèdìng ch?ndì/tèsè bi?ozhì de shíp?n}
+\def\INV@text@identity@zn{ch?ndì/tèsè bi?ozhì}
+\def\INV@text@animalwelfare@zn{dòngwù fúlì}
+\def\INV@text@horsewelfare@zn{m?p? fúlì}
+\def\INV@text@farmercitizen@zn{nóngmín-g?ngmín sh?nfèn}
+\def\INV@text@entrepreneurcitizen@zn{q?yè ji?-g?ngmín sh?nfèn}
+\def\INV@text@farmervaluechain@zn{nóngmín-jiàzhí liàn}
+\def\INV@text@entrepreneurvaluechain@zn{q?yè ji?-jiàzhí liàn}
+\def\INV@text@jobsatisfactionemployer@zn{gùzh? g?ngzuò m?nyì dù}
+\def\INV@text@jobsatisfactionemployees@zn{gùyuán g?ngzuò m?nyì dù}
+
+
+\def\INV@text@soil@bs{Tlo }
+\def\INV@text@crophealth@bs{Zdravlje usjeva }
+\def\INV@text@horsehealth@bs{Zdravlje konja }
+\def\INV@text@foodproduction@bs{Proizvodnja hrane }
+\def\INV@text@forage@bs{Krmno bilje }
+\def\INV@text@energyconsumption@bs{Potrošnja energije }
+\def\INV@text@energysources@bs{Izvori energije }
+\def\INV@text@water@bs{Voda }
+\def\INV@text@nutrientcycle@bs{Ciklus hranjivih tvari }
+\def\INV@text@materialcycle@bs{Ciklus materijala }
+\def\INV@text@materialuse@bs{Korištenje materijala }
+\def\INV@text@airquality@bs{Kvalitet zraka }
+\def\INV@text@biodiversity@bs{Biodiverzitet }
+\def\INV@text@regionallandscape@bs{Regionalni pejzaž }
+\def\INV@text@farmersincome@bs{Prihod poljoprivrednika }
+\def\INV@text@entrepreneursincome@bs{Prihod poljoprivrednika }
+\def\INV@text@foodwithidentity@bs{Hrana sa identitet }
+\def\INV@text@identity@bs{Identitet }
+\def\INV@text@animalwelfare@bs{Dobrobit životinja }
+\def\INV@text@horsewelfare@bs{Dobrobit konja }
+\def\INV@text@farmercitizen@bs{Poljoprivrednik-gra?anin }
+\def\INV@text@entrepreneurcitizen@bs{Poduzetnik-gra?anin }
+\def\INV@text@farmervaluechain@bs{Poljoprivrednik-lanac vrijednosti }
+\def\INV@text@entrepreneurvaluechain@bs{Poduzetnik-lanac vrijednosti }
+\def\INV@text@jobsatisfactionemployer@bs{Zadovoljstvo poslom poslodavac }
+\def\INV@text@jobsatisfactionemployees@bs{Zadovoljstvo poslom zaposlenici}
+
+
+\def\INV@text@soil@am{Hogh}
+\def\INV@text@crophealth@am{Buyseri arroghjut’yun }
+\def\INV@text@horsehealth@am{Dziyeri arroghjut’yun }
+\def\INV@text@foodproduction@am{Snndi artadrut’yun }
+\def\INV@text@forage@am{Anasnaker }
+\def\INV@text@energyconsumption@am{Energiayi sparrum }
+\def\INV@text@energysources@am{Energiayi aghbyurner }
+\def\INV@text@water@am{Jur }
+\def\INV@text@nutrientcycle@am{Snndanyut’eri ts’ikl }
+\def\INV@text@materialcycle@am{Nyut’eri ts’ikl }
+\def\INV@text@materialuse@am{Nyut’eri ogtagortsum }
+\def\INV@text@airquality@am{Odi vorak }
+\def\INV@text@biodiversity@am{Kensabazmazanut’yun }
+\def\INV@text@regionallandscape@am{Taratsashrjanayin landshaft}
+\def\INV@text@farmersincome@am{Fermerneri yekamut}
+\def\INV@text@entrepreneursincome@am{Fermerneri yekamut }
+\def\INV@text@foodwithidentity@am{Snund ink’nut’yamb }
+\def\INV@text@identity@am{Ink’nut’yun }
+\def\INV@text@animalwelfare@am{Kendanineri barekets’ut’yun }
+\def\INV@text@horsewelfare@am{Dziyeri barekets’ut’yun }
+\def\INV@text@farmercitizen@am{Fermer-k’aghak’ats’i }
+\def\INV@text@entrepreneurcitizen@am{DZerrnarkater-k’aghak’ats’i }
+\def\INV@text@farmervaluechain@am{Fermer-arzhek’ayin shght’a }
+\def\INV@text@entrepreneurvaluechain@am{DZerrnarkater-arzhek’ayin shght’a }
+\def\INV@text@jobsatisfactionemployer@am{Ashkhatank’ayin bavararvatsut’yun gortsatu }
+\def\INV@text@jobsatisfactionemployees@am{Ashkhatank’ayin bavararvatsut’yun ashkhatakits’ner}
+
+
+\def\INV@text@soil@es{Suelo}
+\def\INV@text@crophealth@es{Salud de los cultivos}
+\def\INV@text@horsehealth@es{Salud de los caballos}
+\def\INV@text@foodproduction@es{Producción de alimentos}
+\def\INV@text@forage@es{Forraje}
+\def\INV@text@energyconsumption@es{Consumo de energía}
+\def\INV@text@energysources@es{Fuentes de energía}
+\def\INV@text@water@es{Agua}
+\def\INV@text@nutrientcycle@es{Ciclo de nutrientes}
+\def\INV@text@materialcycle@es{Ciclo de materiales}
+\def\INV@text@materialuse@es{Uso de materiales}
+\def\INV@text@airquality@es{Calidad del aire}
+\def\INV@text@biodiversity@es{Biodiversidad}
+\def\INV@text@regionallandscape@es{Paisaje regional}
+\def\INV@text@farmersincome@es{Ingresos del agricultor}
+\def\INV@text@entrepreneursincome@es{Ingresos del agricultor}
+\def\INV@text@foodwithidentity@es{Alimentos con identidad}
+\def\INV@text@identity@es{Identidad}
+\def\INV@text@animalwelfare@es{Bienestar animal}
+\def\INV@text@horsewelfare@es{Bienestar de los caballos}
+\def\INV@text@farmercitizen@es{Agricultor y ciudadano}
+\def\INV@text@entrepreneurcitizen@es{Emprendedor y ciudadano}
+\def\INV@text@farmervaluechain@es{Agricultor y cadena de valor}
+\def\INV@text@entrepreneurvaluechain@es{Emprendedor y cadena de valor}
+\def\INV@text@jobsatisfactionemployer@es{Satisfacción laboral del empleador}
+\def\INV@text@jobsatisfactionemployees@es{Satisfacción laboral de los empleados}
+
+
+\def\INV@text@soil@fy{Zemljište }
+\def\INV@text@crophealth@fy{Zdravlje useva }
+\def\INV@text@horsehealth@fy{Zdravlje konja }
+\def\INV@text@foodproduction@fy{Proizvodnja hrane }
+\def\INV@text@forage@fy{Krmna biljka }
+\def\INV@text@energyconsumption@fy{Potrošnja energije }
+\def\INV@text@energysources@fy{Izvori energije }
+\def\INV@text@water@fy{Voda }
+\def\INV@text@nutrientcycle@fy{Kružni tok hranljivih materija }
+\def\INV@text@materialcycle@fy{Kružni tok materijala }
+\def\INV@text@materialuse@fy{Upotreba materijala }
+\def\INV@text@airquality@fy{Kvalitet vazduha }
+\def\INV@text@biodiversity@fy{Biodiverzitet }
+\def\INV@text@regionallandscape@fy{Regionalni pejzaž }
+\def\INV@text@farmersincome@fy{Prihod poljoprivrednika }
+\def\INV@text@entrepreneursincome@fy{Prihod poljoprivrednika }
+\def\INV@text@foodwithidentity@fy{Hrana sa identitet }
+\def\INV@text@identity@fy{Identitet }
+\def\INV@text@animalwelfare@fy{Dobrobit životinja }
+\def\INV@text@horsewelfare@fy{Dobrobit konja }
+\def\INV@text@farmercitizen@fy{Poljoprivrednik-gra?anin }
+\def\INV@text@entrepreneurcitizen@fy{Preduzetnik-gra?anin }
+\def\INV@text@farmervaluechain@fy{Poljoprivrednik-lanac vrednosti }
+\def\INV@text@entrepreneurvaluechain@fy{Preduzetnik-lanac vrednosti }
+\def\INV@text@jobsatisfactionemployer@fy{Zadovoljstvo poslom poslodavac }
+\def\INV@text@jobsatisfactionemployees@fy{Zadovoljstvo poslom zaposleni}
+
+
+\def\INV@text@soil@no{Jord }
+\def\INV@text@crophealth@no{Avlingshelse }
+\def\INV@text@horsehealth@no{Hestehelse }
+\def\INV@text@foodproduction@no{Matproduksjon }
+\def\INV@text@forage@no{Fôr }
+\def\INV@text@energyconsumption@no{Energiforbruk }
+\def\INV@text@energysources@no{Energikilder }
+\def\INV@text@water@no{Vann }
+\def\INV@text@nutrientcycle@no{Næringsstoffkretsløp }
+\def\INV@text@materialcycle@no{Materialkretsløp }
+\def\INV@text@materialuse@no{Materialbruk }
+\def\INV@text@airquality@no{Luftkvalitet }
+\def\INV@text@biodiversity@no{Biodiversitet }
+\def\INV@text@regionallandscape@no{Regionalt landskap }
+\def\INV@text@farmersincome@no{Bondens inntekt }
+\def\INV@text@entrepreneursincome@no{Bondens inntekt }
+\def\INV@text@foodwithidentity@no{Mat med identitet }
+\def\INV@text@identity@no{Identitet }
+\def\INV@text@animalwelfare@no{Dyrevelferd }
+\def\INV@text@horsewelfare@no{Hestevelferd }
+\def\INV@text@farmercitizen@no{Bonde-borger }
+\def\INV@text@entrepreneurcitizen@no{Entreprenør-borger }
+\def\INV@text@farmervaluechain@no{Bonde-verdikjede }
+\def\INV@text@entrepreneurvaluechain@no{Entreprenør-verdikjede }
+\def\INV@text@jobsatisfactionemployer@no{Jobbtilfredshet arbeidsgiver }
+\def\INV@text@jobsatisfactionemployees@no{Jobbtilfredshet ansatte}
+
+\def\INV@text@soil@lt{Dirvožemis }
+\def\INV@text@crophealth@lt{Pas?li? sveikata }
+\def\INV@text@horsehealth@lt{Arkli? sveikata }
+\def\INV@text@foodproduction@lt{Maisto gamyba }
+\def\INV@text@forage@lt{Pašarai }
+\def\INV@text@energyconsumption@lt{Energijos suvartojimas }
+\def\INV@text@energysources@lt{Energijos šaltiniai }
+\def\INV@text@water@lt{Vanduo }
+\def\INV@text@nutrientcycle@lt{Maistini? medžiag? ciklas }
+\def\INV@text@materialcycle@lt{Medžiag? ciklas }
+\def\INV@text@materialuse@lt{Medžiag? naudojimas }
+\def\INV@text@airquality@lt{Oro kokyb? }
+\def\INV@text@biodiversity@lt{Biologin? ?vairov? }
+\def\INV@text@regionallandscape@lt{Regioninis kraštovaizdis}
+\def\INV@text@farmersincome@lt{?kininko pajamos}
+\def\INV@text@entrepreneursincome@lt{?kininko pajamos }
+\def\INV@text@foodwithidentity@lt{Maistas su tapatybe }
+\def\INV@text@identity@lt{Tapatybe }
+\def\INV@text@animalwelfare@lt{Gyv?n? gerov? }
+\def\INV@text@horsewelfare@lt{Arkli? gerov? }
+\def\INV@text@farmercitizen@lt{?kininkas-pilietis }
+\def\INV@text@entrepreneurcitizen@lt{Verslininkas-pilietis }
+\def\INV@text@farmervaluechain@lt{?kininkas-vert?s grandin? }
+\def\INV@text@entrepreneurvaluechain@lt{Verslininkas-vert?s grandin? }
+\def\INV@text@jobsatisfactionemployer@lt{Darbdavio pasitenkinimas darbu }
+\def\INV@text@jobsatisfactionemployees@lt{Darbuotoj? pasitenkinimas darbu}
+
+
+\def\INV@text@soil@lb{Buedem}
+\def\INV@text@crophealth@lb{Kulturengesondheet}
+\def\INV@text@horsehealth@lb{Päerdsgesondheet}
+\def\INV@text@foodproduction@lb{Liewensmëttelproduktioun}
+\def\INV@text@forage@lb{Fudder}
+\def\INV@text@energyconsumption@lb{Energieverbrauch}
+\def\INV@text@energysources@lb{Energiequellen}
+\def\INV@text@water@lb{Waasser }
+\def\INV@text@nutrientcycle@lb{Nährstoffkreeslaf}
+\def\INV@text@materialcycle@lb{Materialkreeslaf}
+\def\INV@text@materialuse@lb{Materialverbrauch}
+\def\INV@text@airquality@lb{Loftqualitéit}
+\def\INV@text@biodiversity@lb{Biodiversitéit}
+\def\INV@text@regionallandscape@lb{Regional Landschaft}
+\def\INV@text@farmersincome@lb{Akommes vum Bauer}
+\def\INV@text@entrepreneursincome@lb{Akommes vum Bauer}
+\def\INV@text@foodwithidentity@lb{Liewensmëttel mat identitéit}
+\def\INV@text@identity@lb{Identitéit}
+\def\INV@text@animalwelfare@lb{Déierewuelbefannen}
+\def\INV@text@horsewelfare@lb{Päerdswuelbefannen}
+\def\INV@text@farmercitizen@lb{Bauer-Bierger}
+\def\INV@text@entrepreneurcitizen@lb{Entrepreneur-Bierger}
+\def\INV@text@farmervaluechain@lb{Bauer-Wäertkette}
+\def\INV@text@entrepreneurvaluechain@lb{Entrepreneur-Wäertkette}
+\def\INV@text@jobsatisfactionemployer@lb{Zefriddenheet mat der Aarbechtsplaz Patron}
+\def\INV@text@jobsatisfactionemployees@lb{Zefriddenheet mat der Aarbechtsplaz Mataarbechter}
+
+
+\def\INV@text@soil@lv{Augsne }
+\def\INV@text@crophealth@lv{Kult?raugu vesel?ba }
+\def\INV@text@horsehealth@lv{Zirgu vesel?ba }
+\def\INV@text@foodproduction@lv{P?rtikas ražošana }
+\def\INV@text@forage@lv{Lopbar?ba }
+\def\INV@text@energyconsumption@lv{Ener?ijas pat?ri?š }
+\def\INV@text@energysources@lv{Ener?ijas avoti }
+\def\INV@text@water@lv{?dens }
+\def\INV@text@nutrientcycle@lv{Bar?bas vielu aprite }
+\def\INV@text@materialcycle@lv{Materi?lu aprite }
+\def\INV@text@materialuse@lv{Materi?lu izmantošana }
+\def\INV@text@airquality@lv{Gaisa kvalit?te }
+\def\INV@text@biodiversity@lv{Biolo?isk? daudzveid?ba }
+\def\INV@text@regionallandscape@lv{Re?ion?l? ainava}
+\def\INV@text@farmersincome@lv{Lauksaimnieka ien?kumi}
+\def\INV@text@entrepreneursincome@lv{Lauksaimnieka ien?kumi }
+\def\INV@text@foodwithidentity@lv{P?rtika ar identit?ti }
+\def\INV@text@identity@lv{Identit?ti }
+\def\INV@text@animalwelfare@lv{Dz?vnieku labtur?ba }
+\def\INV@text@horsewelfare@lv{Zirgu labtur?ba }
+\def\INV@text@farmercitizen@lv{Lauksaimnieks-pilsonis }
+\def\INV@text@entrepreneurcitizen@lv{Uz??m?js-pilsonis }
+\def\INV@text@farmervaluechain@lv{Lauksaimnieks-v?rt?bu ??de }
+\def\INV@text@entrepreneurvaluechain@lv{Uz??m?ja-v?rt?bu ??de }
+\def\INV@text@jobsatisfactionemployer@lv{Darba dev?ja apmierin?t?ba ar darbu }
+\def\INV@text@jobsatisfactionemployees@lv{Darbinieku apmierin?t?ba ar darbu}
+
+\def\INV@text@soil@la{Solum}
+\def\INV@text@crophealth@la{Salus Segetum}
+\def\INV@text@horsehealth@la{Salus Equina}
+\def\INV@text@foodproduction@la{Productio Cibi}
+\def\INV@text@forage@la{Pabulum }
+\def\INV@text@energyconsumption@la{Consumptio Energiae }
+\def\INV@text@energysources@la{Fontes Energiae }
+\def\INV@text@water@la{Aqua }
+\def\INV@text@nutrientcycle@la{Cyclus Nutrimentorum }
+\def\INV@text@materialcycle@la{Cyclus Materiarum }
+\def\INV@text@materialuse@la{Usus Materiarum }
+\def\INV@text@airquality@la{Qualitas Aeris }
+\def\INV@text@biodiversity@la{Biodiversitas }
+\def\INV@text@regionallandscape@la{Prospectus Regionalis}
+\def\INV@text@farmersincome@la{Reditus Agricolae}
+\def\INV@text@entrepreneursincome@la{Reditus Agricolae }
+\def\INV@text@foodwithidentity@la{Cibus cum identitate }
+\def\INV@text@identity@la{Identitate }
+\def\INV@text@animalwelfare@la{Cura Animalium }
+\def\INV@text@horsewelfare@la{Cura Equorum }
+\def\INV@text@farmercitizen@la{Agricola-Civitis }
+\def\INV@text@entrepreneurcitizen@la{Imprenditor-Civitis }
+\def\INV@text@farmervaluechain@la{Agricola-Catena Valoris }
+\def\INV@text@entrepreneurvaluechain@la{Imprenditor-Catena Valoris }
+\def\INV@text@jobsatisfactionemployer@la{Satisfactio Laboris Conductoris }
+\def\INV@text@jobsatisfactionemployees@la{Satisfactio Laboris Operariorum}
+
+
+\def\INV@text@soil@ko{toyang}
+\def\INV@text@crophealth@ko{jagmul geongang}
+\def\INV@text@horsehealth@ko{mal-ui geongang}
+\def\INV@text@foodproduction@ko{siglyang saengsan}
+\def\INV@text@forage@ko{salyo jagmul}
+\def\INV@text@energyconsumption@ko{eneoji sobi}
+\def\INV@text@energysources@ko{eneojiwon}
+\def\INV@text@water@ko{mul}
+\def\INV@text@nutrientcycle@ko{yeong-yangbun sunhwan}
+\def\INV@text@materialcycle@ko{muljil sunhwan}
+\def\INV@text@materialuse@ko{muljil sayong}
+\def\INV@text@airquality@ko{daegijil}
+\def\INV@text@biodiversity@ko{saengmuldayangseong}
+\def\INV@text@regionallandscape@ko{jiyeog gyeong-gwan}
+\def\INV@text@farmersincome@ko{nong-ga sodeug}
+\def\INV@text@entrepreneursincome@ko{nong-ga sodeug}
+\def\INV@text@foodwithidentity@ko{jeongcheseong-i issneun meoggeoli}
+\def\INV@text@identity@ko{jeongcheseong}
+\def\INV@text@animalwelfare@ko{dongmul bogji}
+\def\INV@text@horsewelfare@ko{mal bogji}
+\def\INV@text@farmercitizen@ko{nongmin-ija simin}
+\def\INV@text@entrepreneurcitizen@ko{gieobgaija simin}
+\def\INV@text@farmervaluechain@ko{nongmin-gachi saseul}
+\def\INV@text@entrepreneurvaluechain@ko{gieobga-gachi saseul}
+\def\INV@text@jobsatisfactionemployer@ko{goyongjuui jigmu manjogdo}
+\def\INV@text@jobsatisfactionemployees@ko{geunlojaui jigmu manjogdo}
+
+
+\def\INV@text@soil@ky{Top?raq }
+\def\INV@text@crophealth@ky{Ösimdik densawl??? }
+\def\INV@text@horsehealth@ky{J?lq? densawl??? }
+\def\INV@text@foodproduction@ky{Az?q-tülik öndirisi }
+\def\INV@text@forage@ky{Jem?öp }
+\def\INV@text@energyconsumption@ky{Énergïya tut?nw? }
+\def\INV@text@energysources@ky{Énergïya közderi }
+\def\INV@text@water@ky{Sw }
+\def\INV@text@nutrientcycle@ky{Qorektik zattar aynal?m? }
+\def\INV@text@materialcycle@ky{Materïald?q aynal?m }
+\def\INV@text@materialuse@ky{Materïald?q paydalanw }
+\def\INV@text@airquality@ky{Awa sapas? }
+\def\INV@text@biodiversity@ky{Bïoärtürlilik }
+\def\INV@text@regionallandscape@ky{Aymaqt?q land?aft}
+\def\INV@text@farmersincome@ky{Fermerdiñ tab?s?}
+\def\INV@text@entrepreneursincome@ky{Fermerdiñ tab?s? }
+\def\INV@text@foodwithidentity@ky{Jeke bas?n kwäland?rat?n az?q-tülik }
+\def\INV@text@identity@ky{Jeke bas?n kwäland?rat?n az?q-tülik }
+\def\INV@text@animalwelfare@ky{Janwarlard?ñ äl-awqat? }
+\def\INV@text@horsewelfare@ky{J?lq? äl-awqat? }
+\def\INV@text@farmercitizen@ky{Fermer-azamat }
+\def\INV@text@entrepreneurcitizen@ky{Käsipker-azamat }
+\def\INV@text@farmervaluechain@ky{Fermer-qun tizbegi }
+\def\INV@text@entrepreneurvaluechain@ky{Käsipker-qun tizbegi }
+\def\INV@text@jobsatisfactionemployer@ky{Jum?s berw?iniñ jum?sqa qana?attanw? }
+\def\INV@text@jobsatisfactionemployees@ky{Jum?sqa qana?attanw??l?q q?zmetkerler}
+
+
+\def\INV@text@soil@ja{Doj? }
+\def\INV@text@crophealth@ja{sakumotsu no kenzen}
+\def\INV@text@horsehealth@ja{sei-ba no kenk?}
+\def\INV@text@foodproduction@ja{shokury? seisan}
+\def\INV@text@forage@ja{shiry? sakumotsu }
+\def\INV@text@energyconsumption@ja{enerug? sh?hi }
+\def\INV@text@energysources@ja{enerug?-gen }
+\def\INV@text@water@ja{mizu }
+\def\INV@text@nutrientcycle@ja{y?bun }
+\def\INV@text@materialcycle@ja{junkan busshitsu }
+\def\INV@text@materialuse@ja{junkan shizai }
+\def\INV@text@airquality@ja{riy? dai katagi }
+\def\INV@text@biodiversity@ja{seibutsu tay?-sei chiiki }
+\def\INV@text@regionallandscape@ja{no keikan n?gy?-sha }
+\def\INV@text@farmersincome@ja{no shotoku n?gy?-sha }
+\def\INV@text@entrepreneursincome@ja{no shotoku sanchi ya seisan-sha }
+\def\INV@text@foodwithidentity@ja{no kao ga mieru shokury? }
+\def\INV@text@identity@ja{aidentiti }
+\def\INV@text@animalwelfare@ja{d?butsu fukushi-ba no }
+\def\INV@text@horsewelfare@ja{fukushi n?gy?-sha }
+\def\INV@text@farmercitizen@ja{shimin kigy?ka }
+\def\INV@text@entrepreneurcitizen@ja{shimin }
+\def\INV@text@farmervaluechain@ja{n?gy?-sha to bary?ch?n }
+\def\INV@text@entrepreneurvaluechain@ja{kigy?ka to bary?ch?n }
+\def\INV@text@jobsatisfactionemployer@ja{koy?shu no shigoto no manzoku-do }
+\def\INV@text@jobsatisfactionemployees@ja{j?gy?in no shigoto no manzoku-do}
+
+
+\def\INV@text@soil@it{Suolo}
+\def\INV@text@crophealth@it{Salute delle colture}
+\def\INV@text@horsehealth@it{Salute dei cavalli}
+\def\INV@text@foodproduction@it{Produzione alimentare}
+\def\INV@text@forage@it{Foraggio}
+\def\INV@text@energyconsumption@it{Consumo energetico}
+\def\INV@text@energysources@it{Fonti di energia}
+\def\INV@text@water@it{Acqua}
+\def\INV@text@nutrientcycle@it{Ciclo dei nutrienti}
+\def\INV@text@materialcycle@it{Ciclo dei materiali}
+\def\INV@text@materialuse@it{Utilizzo dei materiali}
+\def\INV@text@airquality@it{Qualità dell'aria}
+\def\INV@text@biodiversity@it{Biodiversità}
+\def\INV@text@regionallandscape@it{Paesaggio regionale}
+\def\INV@text@farmersincome@it{Reddito dell'agricoltore}
+\def\INV@text@entrepreneursincome@it{Reddito dell'agricoltore}
+\def\INV@text@foodwithidentity@it{Alimenti con identità}
+\def\INV@text@identity@it{Identità}
+\def\INV@text@animalwelfare@it{Benessere animale}
+\def\INV@text@horsewelfare@it{Benessere dei cavalli}
+\def\INV@text@farmercitizen@it{Agricoltore-cittadino}
+\def\INV@text@entrepreneurcitizen@it{Imprenditore-cittadino}
+\def\INV@text@farmervaluechain@it{Agricoltore e filiera}
+\def\INV@text@entrepreneurvaluechain@it{Imprenditore e filiera}
+\def\INV@text@jobsatisfactionemployer@it{Soddisfazione lavorativa (datore di lavoro)}
+\def\INV@text@jobsatisfactionemployees@it{Soddisfazione lavorativa (dipendenti)}
+
+
+\def\INV@text@soil@is{Jarðvegur }
+\def\INV@text@crophealth@is{Heilbrigði uppskeru }
+\def\INV@text@horsehealth@is{Heilbrigði hesta }
+\def\INV@text@foodproduction@is{Matvælaframleiðsla }
+\def\INV@text@forage@is{Fóður }
+\def\INV@text@energyconsumption@is{Orkunotkun }
+\def\INV@text@energysources@is{Orkugjafar }
+\def\INV@text@water@is{Vatn }
+\def\INV@text@nutrientcycle@is{Hringrás næringarefna }
+\def\INV@text@materialcycle@is{Hringrás efnis }
+\def\INV@text@materialuse@is{Efnisnotkun }
+\def\INV@text@airquality@is{Loftgæði }
+\def\INV@text@biodiversity@is{Líffræðilegur fjölbreytileiki }
+\def\INV@text@regionallandscape@is{Landslag svæðisins}
+\def\INV@text@farmersincome@is{Tekjur bónda}
+\def\INV@text@entrepreneursincome@is{Tekjur bónda }
+\def\INV@text@foodwithidentity@is{Matur með }
+\def\INV@text@identity@is{Sjálfsmynd }
+\def\INV@text@animalwelfare@is{Velferð dýra }
+\def\INV@text@horsewelfare@is{Velferð hesta }
+\def\INV@text@farmercitizen@is{Bóndi-borgari }
+\def\INV@text@entrepreneurcitizen@is{Frumkvöðull-borgari }
+\def\INV@text@farmervaluechain@is{Virðiskeðja bónda }
+\def\INV@text@entrepreneurvaluechain@is{Virðiskeðja frumkvöðla }
+\def\INV@text@jobsatisfactionemployer@is{Atvinnuánægja vinnuveitandi }
+\def\INV@text@jobsatisfactionemployees@is{Atvinnuánægja starfsmanna}
+
+
+\def\INV@text@soil@fs{Boaiem }
+\def\INV@text@crophealth@fs{Gewas sûnens }
+\def\INV@text@horsehealth@fs{Hynste sûnens }
+\def\INV@text@foodproduction@fs{Itenproduksje }
+\def\INV@text@forage@fs{Foer }
+\def\INV@text@energyconsumption@fs{Enerzjyferbrûk }
+\def\INV@text@energysources@fs{Enerzjyboarnen }
+\def\INV@text@water@fs{Wetter }
+\def\INV@text@nutrientcycle@fs{Fiedingsstoffenkringloop }
+\def\INV@text@materialcycle@fs{Materiaalkringloop }
+\def\INV@text@materialuse@fs{Materiaalgebrûk }
+\def\INV@text@airquality@fs{Loftkwaliteit }
+\def\INV@text@biodiversity@fs{Biodiversiteit }
+\def\INV@text@regionallandscape@fs{Regionaal lânskip}
+\def\INV@text@farmersincome@fs{Ynkommen fan boer}
+\def\INV@text@entrepreneursincome@fs{Ynkommen fan boer }
+\def\INV@text@foodwithidentity@fs{Iten mei identiteit }
+\def\INV@text@identity@fs{Identiteit }
+\def\INV@text@animalwelfare@fs{Dierenwolwêzen }
+\def\INV@text@horsewelfare@fs{Hynstewolwêzen }
+\def\INV@text@farmercitizen@fs{Boer-boarger }
+\def\INV@text@entrepreneurcitizen@fs{Undernimmer-boarger }
+\def\INV@text@farmervaluechain@fs{Boer-weardeketen }
+\def\INV@text@entrepreneurvaluechain@fs{Undernimmer-weardeketen}
+\def\INV@text@jobsatisfactionemployer@fs{Tefredenheid mei wurkgelegenheid wurkjouwer }
+\def\INV@text@jobsatisfactionemployees@fs{Tefredenheid meiwurkers}
+
+
+\def\INV@text@soil@fr{Sol}
+\def\INV@text@crophealth@fr{Santé des cultures}
+\def\INV@text@horsehealth@fr{Santé des chevaux}
+\def\INV@text@foodproduction@fr{Production alimentaire}
+\def\INV@text@forage@fr{Fourrage}
+\def\INV@text@energyconsumption@fr{Consommation d'énergie}
+\def\INV@text@energysources@fr{Sources d'énergie}
+\def\INV@text@water@fr{Eau}
+\def\INV@text@nutrientcycle@fr{Cycle des nutriments}
+\def\INV@text@materialcycle@fr{Cycle des matières}
+\def\INV@text@materialuse@fr{Utilisation des matières}
+\def\INV@text@airquality@fr{Qualité de l'air}
+\def\INV@text@biodiversity@fr{Biodiversité}
+\def\INV@text@regionallandscape@fr{Paysage régional}
+\def\INV@text@farmersincome@fr{Revenu de l'agriculteur}
+\def\INV@text@entrepreneursincome@fr{Revenu de l'agriculteur}
+\def\INV@text@foodwithidentity@fr{Alimentation porteuse d'identité}
+\def\INV@text@identity@fr{Identité}
+\def\INV@text@animalwelfare@fr{Bien-être animal}
+\def\INV@text@horsewelfare@fr{Bien-être des chevaux}
+\def\INV@text@farmercitizen@fr{Agriculteur-citoyen}
+\def\INV@text@entrepreneurcitizen@fr{Entrepreneur-citoyen}
+\def\INV@text@farmervaluechain@fr{Agriculteur et chaîne de valeur}
+\def\INV@text@entrepreneurvaluechain@fr{Entrepreneur et chaîne de valeur}
+\def\INV@text@jobsatisfactionemployer@fr{Satisfaction de l'employeur au travail}
+\def\INV@text@jobsatisfactionemployees@fr{Satisfaction des employés au travail}
+
+
+\def\INV@text@soil@fi{Maaperä }
+\def\INV@text@crophealth@fi{Kasvien terveys }
+\def\INV@text@horsehealth@fi{Hevosten terveys }
+\def\INV@text@foodproduction@fi{Ruoantuotanto }
+\def\INV@text@forage@fi{Rehu }
+\def\INV@text@energyconsumption@fi{Energiankulutus }
+\def\INV@text@energysources@fi{Energialähteet }
+\def\INV@text@water@fi{Vesi }
+\def\INV@text@nutrientcycle@fi{Ravinteiden kierto }
+\def\INV@text@materialcycle@fi{Materiaalikierto }
+\def\INV@text@materialuse@fi{Materiaalien käyttö }
+\def\INV@text@airquality@fi{Ilmanlaatu }
+\def\INV@text@biodiversity@fi{Luonnon monimuotoisuus }
+\def\INV@text@regionallandscape@fi{Alueellinen maisema}
+\def\INV@text@farmersincome@fi{Viljelijän tulot }
+\def\INV@text@entrepreneursincome@fi{Viljelijän tulot }
+\def\INV@text@foodwithidentity@fi{Ruokaa ja identiteettiä }
+\def\INV@text@identity@fi{Identiteettiä }
+\def\INV@text@animalwelfare@fi{Eläinten hyvinvointi }
+\def\INV@text@horsewelfare@fi{Hevosten hyvinvointi }
+\def\INV@text@farmercitizen@fi{Viljelijä-kansalainen }
+\def\INV@text@entrepreneurcitizen@fi{Yrittäjä-kansalainen }
+\def\INV@text@farmervaluechain@fi{Viljelijä-arvoketju}
+\def\INV@text@entrepreneurvaluechain@fi{ Yrittäjä-arvoketju }
+\def\INV@text@jobsatisfactionemployer@fi{ Työtyytyväisyys työnantajalle }
+\def\INV@text@jobsatisfactionemployees@fi{ Työtyytyväisyys työntekijöille}
+
+
+\def\INV@text@soil@ky{Topurak }
+\def\INV@text@crophealth@ky{Ösümdüktördün den soolugu }
+\def\INV@text@horsehealth@ky{J?lk?n?n den soolugu }
+\def\INV@text@foodproduction@ky{Az?k-tülük öndürüü }
+\def\INV@text@forage@ky{Toyut }
+\def\INV@text@energyconsumption@ky{Energiyan? kerektöö }
+\def\INV@text@energysources@ky{Energiya bulaktar? }
+\def\INV@text@water@ky{Suu }
+\def\INV@text@nutrientcycle@ky{Az?k zattard?n aylan??? }
+\def\INV@text@materialcycle@ky{Materiald?k aylan??? }
+\def\INV@text@materialuse@ky{Materiald?k koldonuu }
+\def\INV@text@airquality@ky{Aban?n sapat? }
+\def\INV@text@biodiversity@ky{Biologiyal?k ar türdüülük }
+\def\INV@text@regionallandscape@ky{Regionald?k land?aft}
+\def\INV@text@farmersincome@ky{Fermerdin kire?esi}
+\def\INV@text@entrepreneursincome@ky{Fermerdin kire?esi }
+\def\INV@text@foodwithidentity@ky{Özdügün körsötkön az?k-tülük }
+\def\INV@text@identity@ky{Özdügün an?ktoo }
+\def\INV@text@animalwelfare@ky{Jan?barlard?n j?rgalç?l?g? }
+\def\INV@text@horsewelfare@ky{J?lk?n?n j?rgalç?l?g? }
+\def\INV@text@farmercitizen@ky{Fermer-jaran }
+\def\INV@text@entrepreneurcitizen@ky{??ker-jaran}
+\def\INV@text@farmervaluechain@ky{Fermer-nark ç?nj?r? }
+\def\INV@text@entrepreneurvaluechain@ky{??ker-nark ç?nj?r? }
+\def\INV@text@jobsatisfactionemployer@ky{Jumu? orundar?nan kanaattanuu jumu? berüüçü }
+\def\INV@text@jobsatisfactionemployees@ky{Jumu? orundar?nan kanaattanuu k?zmatkerler}
+
+\def\INV@text@soil@pa{Mi??}
+\def\INV@text@crophealth@pa{fasal?? d? sihata}
+\def\INV@text@horsehealth@pa{gh??i'?? d? sihata}
+\def\INV@text@foodproduction@pa{bh?jana utap?dana}
+\def\INV@text@forage@pa{c?r?}
+\def\INV@text@energyconsumption@pa{?raj? d? khapata}
+\def\INV@text@energysources@pa{?raj? sar?ta}
+\def\INV@text@water@pa{p???}
+\def\INV@text@nutrientcycle@pa{pau?a?ika tata cakara}
+\def\INV@text@materialcycle@pa{pad?ratha cakara}
+\def\INV@text@materialuse@pa{pad?ratha d? varat??}
+\def\INV@text@airquality@pa{hav? d? gu?avat?}
+\def\INV@text@biodiversity@pa{jaiva vibhinat?}
+\def\INV@text@regionallandscape@pa{kh?tar? lai??asak?pa}
+\def\INV@text@farmersincome@pa{kis?na d? ?madana}
+\def\INV@text@entrepreneursincome@pa{kis?na d? ?madana}
+\def\INV@text@foodwithidentity@pa{pach??a v?l? bh?jana}
+\def\INV@text@identity@pa{pach??a}
+\def\INV@text@animalwelfare@pa{pa?? bhal?'?}
+\def\INV@text@horsewelfare@pa{gh??i'?? d? bhal?'?}
+\def\INV@text@farmercitizen@pa{kis?na-n?garika}
+\def\INV@text@entrepreneurcitizen@pa{udam?-n?garika}
+\def\INV@text@farmervaluechain@pa{kis?na-mula la??}
+\def\INV@text@entrepreneurvaluechain@pa{udam?-mula la??}
+\def\INV@text@jobsatisfactionemployer@pa{naukar?'?? d? satu?a?? m?laka}
+\def\INV@text@jobsatisfactionemployees@pa{naukar?'?? d? satu?a?? karamac?r?}
+
+
+\def\INV@text@soil@hi{mitti}
+\def\INV@text@crophealth@hi{fasal ki sehat}
+\def\INV@text@horsehealth@hi{ghodon ki sehat}
+\def\INV@text@foodproduction@hi{khadya utpadan}
+\def\INV@text@forage@hi{chara}
+\def\INV@text@energyconsumption@hi{urja ki khpat}
+\def\INV@text@energysources@hi{urja ke srot}
+\def\INV@text@water@hi{pani}
+\def\INV@text@nutrientcycle@hi{poshak tatvon ka chakra}
+\def\INV@text@materialcycle@hi{samgri ka chakra}
+\def\INV@text@materialuse@hi{samgri ka upyog}
+\def\INV@text@airquality@hi{hawa ki gunvata}
+\def\INV@text@biodiversity@hi{jaiv vividhta}
+\def\INV@text@regionallandscape@hi{kshetriy paridrishya}
+\def\INV@text@farmersincome@hi{kisan ki aay}
+\def\INV@text@entrepreneursincome@hi{kisan ki aay}
+\def\INV@text@foodwithidentity@hi{khas pehchan wala bhojan}
+\def\INV@text@identity@hi{pahchan}
+\def\INV@text@animalwelfare@hi{pashu kalyan}
+\def\INV@text@horsewelfare@hi{ghodon ka kalyan}
+\def\INV@text@farmercitizen@hi{kisan-nagarik}
+\def\INV@text@entrepreneurcitizen@hi{udyami-nagarik}
+\def\INV@text@farmervaluechain@hi{kisan-valu chen}
+\def\INV@text@entrepreneurvaluechain@hi{udyami-valu chen}
+\def\INV@text@jobsatisfactionemployer@hi{niyokta ki naukri se santushti}
+\def\INV@text@jobsatisfactionemployees@hi{karmchariyon ki naukri se santushti}
+
+\def\INV@text@soil@eo{Grundo}
+\def\INV@text@crophealth@eo{Sano de kultiva?oj}
+\def\INV@text@horsehealth@eo{Sano de ?evaloj}
+\def\INV@text@foodproduction@eo{Nutra?produktado}
+\def\INV@text@forage@eo{Fura?o}
+\def\INV@text@energyconsumption@eo{Energia konsumo}
+\def\INV@text@energysources@eo{Energifontoj}
+\def\INV@text@water@eo{Akvo}
+\def\INV@text@nutrientcycle@eo{Nutra?ciklo}
+\def\INV@text@materialcycle@eo{Materiala ciklo}
+\def\INV@text@materialuse@eo{Materialuzo}
+\def\INV@text@airquality@eo{Aerkvalito}
+\def\INV@text@biodiversity@eo{Biodiverseco}
+\def\INV@text@regionallandscape@eo{Regiona pejza?o}
+\def\INV@text@farmersincome@eo{Enspezo de farmisto}
+\def\INV@text@entrepreneursincome@eo{Enspezo de entreprenisto}
+\def\INV@text@foodwithidentity@eo{Nutra?o kun identeco}
+\def\INV@text@identity@eo{Identeco}
+\def\INV@text@animalwelfare@eo{Besto-bonfarto}
+\def\INV@text@horsewelfare@eo{?evala bonfarto}
+\def\INV@text@farmercitizen@eo{Farmisto-civitano}
+\def\INV@text@entrepreneurcitizen@eo{Entreprenisto-civitano}
+\def\INV@text@farmervaluechain@eo{Farmisto-valora ?eno}
+\def\INV@text@entrepreneurvaluechain@eo{Entreprenisto-valora ?eno}
+\def\INV@text@jobsatisfactionemployer@eo{Laborkontento de dunganto}
+\def\INV@text@jobsatisfactionemployees@eo{Laborkontento de dungitoj}
+
+\def\INV@text@soil@il{Kth\^{a}lxei}
+\def\INV@text@crophealth@il{Qelyai}
+\def\INV@text@horsehealth@il{Kharvai}
+\def\INV@text@foodproduction@il{Qelvar}
+\def\INV@text@forage@il{Qelfor}
+\def\INV@text@energyconsumption@il{Enerkai}
+\def\INV@text@energysources@il{Enervai}
+\def\INV@text@water@il{Watai}
+\def\INV@text@nutrientcycle@il{Nutravai}
+\def\INV@text@materialcycle@il{Matelai}
+\def\INV@text@materialuse@il{Matulai}
+\def\INV@text@airquality@il{Airqai}
+\def\INV@text@biodiversity@il{Biovar}
+\def\INV@text@regionallandscape@il{Landrai}
+\def\INV@text@farmersincome@il{Farqai}
+\def\INV@text@entrepreneursincome@il{Kharentrqai}
+\def\INV@text@foodwithidentity@il{Foodyai}
+\def\INV@text@identity@il{Identai}
+\def\INV@text@animalwelfare@il{Animalvai}
+\def\INV@text@horsewelfare@il{Kharvai}
+\def\INV@text@farmercitizen@il{Citfarai}
+\def\INV@text@entrepreneurcitizen@il{Citentravai}
+\def\INV@text@farmervaluechain@il{Valchainai}
+\def\INV@text@entrepreneurvaluechain@il{Entrchainai}
+\def\INV@text@jobsatisfactionemployer@il{Jobsatvarkai}
+\def\INV@text@jobsatisfactionemployees@il{Jobsatmelkai}
+
+% Standard values
+\def \INV@content@soil {1. Soil}
+\def \INV@content@crophealth {2. CH}
+\def \INV@content@horsehealth {2. HH}
+\def \INV@content@foodproduction {3. FP}
+\def \INV@content@forage {3. F}
+\def \INV@content@energyconsumption {4.a EC}
+\def \INV@content@energysources {4.b ES}
+\def \INV@content@water {5.W}
+\def \INV@content@nutrientcycle{6. NC}
+\def \INV@content@materialcycle {7. MC}
+\def \INV@content@materialuse {7. MU}
+\def \INV@content@airquality {8. AQ}
+\def \INV@content@biodiversity {9. BD}
+\def \INV@content@regionallandscape {10. RLS}
+\def \INV@content@farmersincome {11. FIC}
+\def \INV@content@entrepreneursincome {11. EIC}
+\def \INV@content@foodwithidentity {12. FWI}
+\def \INV@content@identity {12. ID}
+\def \INV@content@animalwelfare {13. AWF}
+\def \INV@content@horsewelfare {13. HWF}
+\def \INV@content@farmercitizen {14. FC}
+\def \INV@content@entrepreneurcitizen {14. EC}
+\def \INV@content@farmervaluechain {15. FVC}
+\def \INV@content@entrepreneurvaluechain {15. EVC}
+\def \INV@content@jobsatisfactionemployer{16.a Job satisfaction employer}
+\def \INV@content@jobsatisfactionemployees{16.b Job satisfaction employees}
+
+
