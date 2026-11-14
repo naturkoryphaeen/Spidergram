@@ -1,8 +1,10 @@
 %% LyX 2.5.1 created this file.  For more info, see https://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
 \documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage[]
+\usepackage[utf8]{luainputenc}
+\usepackage{xcolor}
+\usepackage[bookmarks=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
  {hyperref}
 
 \makeatletter
@@ -11,11 +13,15 @@
 \usepackage[english]{spidergram}
 \usetikzlibrary{spidergram}
 
+
+
+
+
 \makeatother
 
 \begin{document}
 \title{Spidergram.sty package and Spidergram tikzlibrary\\
-version 1.0 (2026-11-14)}
+ version 1.0 (2026-11-14)}
 \author{Carsten Schulz\thanks{Equine Management, NGU Nürtingen-Geislingen University, Blended Intensive
 Programme E.A.S.E (Equine and Agricultural Sustainability Exploration)
 course during 6th semester}}
@@ -23,29 +29,47 @@ course during 6th semester}}
 by Aeres Hogeschool}}
 
 \maketitle
- 
-
 \tableofcontents{}
 
 \vfill{}
 
-The spidergram package provides a comprehensive LaTeX solution for generating visually rich spidergrams—a specialized network diagram used to map complex agricultural or management systems (e.g., farming operations, livestock pathways). By integrating the specific structural demands of the spidergram method into a convenient TeX environment and as a dedicated TikZ library, this package significantly simplifies and standardizes the visualization process for researchers in agriculture/equine enterprises and sustainable resource management.
+The spidergram package provides a comprehensive LaTeX solution for
+generating visually rich spidergrams---a specialized network diagram
+used to map complex agricultural or management systems (e.g., farming
+operations, livestock pathways). By integrating the specific structural
+demands of the spidergram method into a convenient TeX environment
+and as a dedicated TikZ library, this package significantly simplifies
+and standardizes the visualization process for researchers in agriculture/equine
+enterprises and sustainable resource management.
 
-The underlying methodology for representing farms via the spidergram was originally published by Aeres Hogeschool \cite{methorst_het_2026}. The website is \href{https://en.boerenboom.nl/}{Boerenboom}. This LaTeX tool ensures that complex data sets can be reproduced accurately and professionally within academic publications. 
+The underlying methodology for representing farms via the spidergram
+was originally published by Aeres Hogeschool \cite{methorst_het_2026}.
+The website is \href{https://en.boerenboom.nl/}{Boerenboom}. This
+LaTeX tool ensures that complex data sets can be reproduced accurately
+and professionally within academic publications.
 
 For questions regarding the package email Carsten Schulz: \href{mailto:koryphaeen@posteo.net}{koryphaeen@posteo.net}
 
 \section{Prerequisites/Setup}
-To begin using the spidergram package, users must load both the necessary TikZ package and the custom library. The following commands should be placed within the document's preamble:
-\medskip{}
-\texttt{\textbackslash usepackage\{tikz\}}
-\texttt{\textbackslash usepackage{\{spidergram\}}
-\texttt{\textbackslash usetikzlibrary\{spidergram\}}
+
+To begin using the spidergram package, users must load both the necessary
+TikZ package and the custom library. The following commands should
+be placed within the document's preamble: \medskip{}
+{\ttfamily{}%
+\noindent\colorbox{lightgray}{\begin{minipage}[t]{1\columnwidth}%
+\texttt{\textbackslash usepackage\{tikz\}} 
+
+\texttt{\textbackslash usepackage\{spidergram\}}
+
+\texttt{\textbackslash usetikzlibrary\{spidergram\}}%
+\end{minipage}}}
 
 \section{How to use}
 
 \subsection{Specifications in the preamble}
 
+{\ttfamily{}%
+\noindent\colorbox{lightgray}{\begin{minipage}[t]{1\columnwidth}%
 \texttt{\textbackslash usepackage{[}english{]}\{spidergram\}}
 
 \texttt{\%included languages options: romanian, dutch, croatian, german,
@@ -70,70 +94,97 @@ color)}
 
 \texttt{\%the color of the lines in the diagram is defined as:}
 
-\texttt{\%\textbackslash dgcolor\{darkgray\}}
+\texttt{\%\textbackslash dgcolor\{darkgray\}}%
+\end{minipage}}}
 
-\newpage{}
+\texttt{\newpage}
 
-\subsection{Examples}
+\subsection{Practical Application Examples}
 
-Practical Application Examples The following examples demonstrate the usage of {\boeren} and {\paarden} with real-world data \cite{baumann_practical_nodate}. These functions accept a sequence of numerical values, representing connectivity or size metrics at each node in the diagram.
+The following examples demonstrate the usage of \textbackslash boeren
+and \textbackslash paarden with real-world data \cite{baumann_practical_nodate}.
+These functions accept a sequence of numerical values, representing
+connectivity or size metrics at each node in the diagram.
 
 \subsubsection{Example, Boerenboom\protect\marginpar{Farming Tree}}
 
-\medskip{}
+\texttt{\medskip{}
+}
 
-\texttt{\textbackslash begin\{tikzpicture\}{[}scale=0.6, every node/.style=\{scale=0.4\}{]}}
+{\ttfamily{}%
+\noindent\colorbox{lightgray}{\begin{minipage}[t]{1\columnwidth}%
+\texttt{\textbackslash begin\{tikzpicture\}{[}scale=0.75, every node/.style=\{scale=0.5\}{]}}
 
 \texttt{\textbackslash boeren\{4,4,8,7.5,7,6,5,5,4,9,7,7,6,9,7,8,5,8\}}
 
-\texttt{\textbackslash end\{tikzpicture\}}
+\texttt{\textbackslash end\{tikzpicture\}}%
+\end{minipage}}}
 
-\medskip{}
-\texttt{\begin{tikzpicture}[scale=0.6, every node/.style={scale=0.4}]
+\texttt{\medskip{}
+}
+
+\begin{tikzpicture}[scale=0.75, every node/.style={scale=0.5}]
 \boeren{4,4,8,7.5,7,6,5,5,4,9,7,7,6,9,7,8,5,8}
-\end{tikzpicture}}
+\end{tikzpicture}
 
-\newpage{}
+\texttt{\newpage}
 
 \subsubsection{Example, Paardenboom\protect\marginpar{Equine Tree}}
 
-\medskip{}
+\texttt{\medskip{}
+}
 
-\texttt{\textbackslash begin\{tikzpicture\}{[}scale=0.6, every node/.style=\{scale=0.4\}{]}}
+{\ttfamily{}%
+\noindent\colorbox{lightgray}{\begin{minipage}[t]{1\columnwidth}%
+\texttt{\textbackslash begin\{tikzpicture\}{[}scale=0.75, every node/.style=\{scale=0.5\}{]}}
 
 \texttt{\textbackslash paarden\{8,9,10,3.5,10,7,6,7,5,7,9,8,9,4,7,9.5,5,8\}}
 
-\texttt{\textbackslash end\{tikzpicture\}}
+\texttt{\textbackslash end\{tikzpicture\}}%
+\end{minipage}}}
 
-\medskip{}
+\texttt{\medskip{}
+}
 
-\begin{tikzpicture}[scale=0.6, every node/.style={scale=0.4}]
+\texttt{\begin{tikzpicture}[scale=0.75, every node/.style={scale=0.5}]
 \paarden{8,9,10,3.5,10,7,6,7,5,7,9,8,9,4,7,9.5,5,8}
-\end{tikzpicture}
+\end{tikzpicture}}
 
-\newpage{}
+\texttt{\newpage}
 
-\section{Collaboration and Acknowledgments 2026}
-This work was conducted within the framework of a collaborative research effort involving multiple international academic institutions:
+\section*{Collaboration and Acknowledgments}
+
+This work was conducted within the framework of a collaborative research
+effort involving multiple international academic institutions:
 
 \subsection*{Nürtingen-Geislingen NGU (Germany)}
-Supervision provided by Prof. Dr. Heinrich Schüle, Prof. Dr. Dirk Winter, and Prof. Dr. Alexander Wirsig. Key Contributor: Ines Maurmann (M.Sc.). Focus Area: Host university in 2026.
+
+Supervision provided by Prof. Dr. Heinrich Schüle, Prof. Dr. Dirk
+Winter, and Prof. Dr. Alexander Wirsig. Key Contributor: Ines Maurmann
+(M.Sc.). Focus Area: Host university in 2026.
 
 \subsection*{Van Hall Larenstein University VHL (Netherlands)}
-Supervision provided by Prof. Dr. Linda van Haren and Prof. Dr. Marije van der Wal. 
+
+Supervision provided by Prof. Dr. Linda van Haren and Prof. Dr. Marije
+van der Wal.
 
 \subsection*{University of Zagreb UNIZG (Croatia)}
-Supervision provided by Prof. Dr. Marija Cerijak and Prof. Dr. sc. Ante Ivankovic. Key Contributor: Kristijan Bilić (M.Sc.).
+
+Supervision provided by Prof. Dr. Marija Cerijak and Prof. Dr. sc.
+Ante Ivankovic. Key Contributor: Kristijan Bilić (M.Sc.).
 
 \subsection*{University of Agronomic Sciences and Veterinary Medicine Bucharest
 USAMV (Romania)}
+
 Supervision provided by Prof. Dr. Marius Maftei.
 
 \subsection*{Participating students}
-The project benefited from the participation of over 30 visiting students from VHL, UNIZG, and USAMV, contributing to cross-cultural and interdisciplinary data analysis.
-\newpage{}
 
-\bibliographystyle{authordate1}
+The project benefited from the participation of over 30 visiting students
+from VHL, UNIZG, and USAMV, contributing to cross-cultural and interdisciplinary
+data analysis. \newpage{}
+
+ \bibliographystyle{authordate1}
 \bibliography{spidergam/Spidergram}
 
 \end{document}
