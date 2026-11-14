@@ -29,26 +29,27 @@ by Aeres Hogeschool}}
 
 \vfill{}
 
-`spidergram.sty' provides the features of the spidergram in a convenient
-style file and as tikzlibrary. 
+The spidergram package provides a comprehensive LaTeX solution for generating visually rich spidergrams—a specialized network diagram used to map complex agricultural or management systems (e.g., farming operations, livestock pathways). By integrating the specific structural demands of the spidergram method into a convenient TeX environment and as a dedicated TikZ library, this package significantly simplifies and standardizes the visualization process for researchers in agriculture/equine enterprises and sustainable resource management.
 
-For details and implementation of the method:\href{https://en.boerenboom.nl/}{Boerenboom}.\cite{methorst_het_2026}
+The underlying methodology for representing farms via the spidergram was originally published by Aeres Hogeschool \cite{methorst_het_2026}. The website is \href{https://en.boerenboom.nl/}{Boerenboom}. This LaTeX tool ensures that complex data sets can be reproduced accurately and professionally within academic publications. 
 
-For questions regarding the style file or tikzlibrary email me, Carsten
-Schulz: \href{mailto:koryphaeen@posteo.net}{koryphaeen@posteo.net}
+For questions regarding the package email Carsten Schulz: \href{mailto:koryphaeen@posteo.net}{koryphaeen@posteo.net}
+
+\section{Prerequisites/Setup}
+To begin using the spidergram package, users must load both the necessary TikZ package and the custom library. The following commands should be placed within the document's preamble:
+\medskip{}
+\texttt{\textbackslash usepackage\{tikz\}}
+\texttt{\textbackslash usepackage{\{spidergram\}}
+\texttt{\textbackslash usetikzlibrary\{spidergram\}}
 
 \section{How to use}
 
-\subsection{Preamble}
-
-\texttt{\textbackslash usepackage\{tikz\}}
+\subsection{Specifications in the preamble}
 
 \texttt{\textbackslash usepackage{[}english{]}\{spidergram\}}
 
 \texttt{\%included languages options: romanian, dutch, croatian, german,
 english, latin, finnish, svedish}
-
-\texttt{\textbackslash usetikzlibrary\{spidergram\}}
 
 \texttt{\%included predefined colors }
 
@@ -75,7 +76,7 @@ color)}
 
 \subsection{Examples}
 
-These two diagrams are based on real data\cite{baumann_practical_nodate}.
+Practical Application Examples The following examples demonstrate the usage of \boeren and \paarden with real-world data \cite{baumann_practical_nodate}. These functions accept a sequence of numerical values, representing connectivity or size metrics at each node in the diagram.
 
 \subsubsection{Example, Boerenboom\protect\marginpar{Farming Tree}}
 
@@ -112,42 +113,24 @@ These two diagrams are based on real data\cite{baumann_practical_nodate}.
 
 \newpage{}
 
-\section{Cooperating Universities' Supervisors in 2026}
+\section{Collaboration and Acknowledgments 2026}
+This work was conducted within the framework of a collaborative research effort involving multiple international academic institutions:
 
 \subsection*{Nürtingen-Geislingen NGU (Germany)}
-\begin{itemize}
-\item Prof. Dr. Heinrich Schüle
-\item Prof. Dr. Dirk Winter
-\item Prof. Dr. Alexander Wirsig
-\item Ines Maurmann (M.Sc.)
-\end{itemize}
+Supervision provided by Prof. Dr. Heinrich Schüle, Prof. Dr. Dirk Winter, and Prof. Dr. Alexander Wirsig. Key Contributor: Ines Maurmann (M.Sc.). Focus Area: Host university in 2026.
 
 \subsection*{Van Hall Larenstein University VHL (Netherlands)}
-\begin{itemize}
-\item Prof. Dr. Linda van Haren
-\item Prof. Dr. Marije van der Wal
-\end{itemize}
+Supervision provided by Prof. Dr. Linda van Haren and Prof. Dr. Marije van der Wal. 
 
 \subsection*{University of Zagreb UNIZG (Croatia)}
-\begin{itemize}
-\item Prof. Dr. Marija Cerijak
-\item Prof. Dr. sc. Ante Ivankovic
-\item Kristijan Bilić (M.Sc.)
-\end{itemize}
+Supervision provided by Prof. Dr. Marija Cerijak and Prof. Dr. sc. Ante Ivankovic. Key Contributor: Kristijan Bilić (M.Sc.).
 
 \subsection*{University of Agronomic Sciences and Veterinary Medicine Bucharest
 USAMV (Romania)}
-\begin{itemize}
-\item Prof. Dr. Marius Maftei
-\end{itemize}
+Supervision provided by Prof. Dr. Marius Maftei.
 
-\subsection*{30 Guest Students were from from}
-\begin{itemize}
-\item Van Hall Larenstein University VHL
-\item University of Zagreb UNIZG
-\item University of Agronomic Sciences and Veterinary Medicine Bucharest
-USAMV
-\end{itemize}
+\subsection*{Participating students}
+The project benefited from the participation of over 30 visiting students from VHL, UNIZG, and USAMV, contributing to cross-cultural and interdisciplinary data analysis.
 \newpage{}
 
 \bibliographystyle{authordate1}
