@@ -1,35 +1,19 @@
-`spidergram.sty' provides the features of the spidergram in a convenient style file and as tikzlibrary. 
+The spidergram package provides a comprehensive LaTeX solution for generating visually rich spidergrams—a specialized network diagram used to map complex agricultural or management systems (e.g., farming operations, livestock pathways). By integrating the specific structural demands of the spidergram method into a convenient TeX environment and as a dedicated TikZ library, this package significantly simplifies and standardizes the visualization process for researchers in agriculture/equine enterprises and sustainable resource management.
 
-For details and implementation of the method [Methorst et al, 2026]:
-https://en.boerenboom.nl/
+The underlying methodology for representing farms via the spidergram was originally published by Aeres Hogeschool [#methorst_het_2026]. The website is [https://en.boerenboom.nl/||Boerenboom]. This LaTeX tool ensures that complex data sets can be reproduced accurately and professionally within academic publications.
 
-
-For questions regarding the style file or tikzlibrary email me, Carsten Schulz: koryphaeen@posteo.net
+For questions regarding the package email Carsten Schulz: [koryphaeen@posteo.net]
 
 
 How to use
 
-Preamble
+To begin using the spidergram package, users must load both the necessary TikZ package and the custom library. The following commands should be placed within the document's preamble:
 
 \usepackage{tikz}
-\usepackage[english]{spidergram}
-%included languages options: romanian, dutch, croatian, german, english, latin, finnish, svedish
+\usepackage{spidergram}
 \usetikzlibrary{spidergram}
 
-%included predefined colors 
-\sgcolor{tealblue} %(standard and original color)
-%for generation flexibility redefine via one of these
-%\sgcolor{bole}
-%\sgcolor{byzantinum}
-%\sgcolor{sapgreen}
-%\sgcolor{vividburgundy}
-%\sgcolor{yaleblue}
-
-%the color of the lines in the diagram is defined as:
-%\dgcolor{darkgray}
-
-
-Examples[Baumann et al, n.d.]
+Practical Application Examples
 
 Example, Boerenboom (Farming Tree)
 
@@ -43,27 +27,6 @@ Example, Paardenboom (Equine Tree)
 \begin{tikzpicture}[scale=0.6, every node/.style={scale=0.4}]
 \paarden{8,9,10,3.5,10,7,6,7,5,7,9,8,9,4,7,9.5,5,8}
 \end{tikzpicture}
-
-
-Cooperating Universities' Supervisors in 2026
-
-Nürtingen-Geislingen NGU/HfWU (Germany)
-• Prof. Dr. Heinrich Schüle
-• Prof. Dr. Dirk Winter
-• Prof. Dr. Alexander Wirsig
-• Ines Maurmann (M.Sc.)
-
-Van Hall Larenstein University VHL (Netherland)
-• Prof. Dr. Linda van Haren
-• Prof. Dr. Marije van der Wal
-
-University of Zagreb UNIZG (Croatia)
-• Prof. Dr. Marija Cerijak
-• Prof. Dr. sc. Ante Ivankovic
-• Kristijan Bilić (M.Sc.)
-
-University of Agronomic Sciences and Veterinary Medicine Bucharest USAMV (Romania)
-• Prof. Dr. Marius Maftei
 
 30 Guest Students were from from
 • Van Hall Larenstein University VHL
