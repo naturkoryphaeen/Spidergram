@@ -1,0 +1,160 @@
+%% LyX 2.5.1 created this file.  For more info, see https://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[]
+ {hyperref}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\errorcontextlines32
+\usepackage[chatter]{rotating}
+\usepackage{fancyvrb}
+
+\usepackage{tikz}
+\usepackage[english]{spidergram}
+\usetikzlibrary{spidergram}
+
+\makeatother
+
+\begin{document}
+\title{Spidergram.sty package and Spidergram tikzlibrary\\
+version 1.0 (2026-11-14)}
+\author{Carsten Schulz\thanks{Equine Management, NGU Nürtingen-Geislingen University, Blended Intensive
+Programme E.A.S.E (Equine and Agricultural Sustainability Exploration)
+course during 6th semester}}
+\date{November 14th 2026\thanks{the method of representation of a farm by the spidergram was published
+by Aeres Hogeschool}}
+
+\maketitle
+ 
+
+\tableofcontents{}
+
+\vfill{}
+
+`spidergram.sty' provides the features of the spidergram in a convenient
+style file and as tikzlibrary. 
+
+For details and implementation of the method:\href{https://en.boerenboom.nl/}{Boerenboom}.\cite{methorst_het_2026}
+
+For questions regarding the style file or tikzlibrary email me, Carsten
+Schulz: \href{mailto:koryphaeen@posteo.net}{koryphaeen@posteo.net}
+
+\section{How to use}
+
+\subsection{Preamble}
+
+\texttt{\textbackslash usepackage\{tikz\}}
+
+\texttt{\textbackslash usepackage{[}english{]}\{spidergram\}}
+
+\texttt{\%included languages options: romanian, dutch, croatian, german,
+english, latin, finnish, svedish}
+
+\texttt{\textbackslash usetikzlibrary\{spidergram\}}
+
+\texttt{\%included predefined colors }
+
+\texttt{\textbackslash sgcolor\{tealblue\} \%(standard and original
+color)}
+
+\texttt{\%for generation flexibility redefine via one of these}
+
+\texttt{\%\textbackslash sgcolor\{bole\}}
+
+\texttt{\%\textbackslash sgcolor\{byzantinum\}}
+
+\texttt{\%\textbackslash sgcolor\{sapgreen\}}
+
+\texttt{\%\textbackslash sgcolor\{vividburgundy\}}
+
+\texttt{\%\textbackslash sgcolor\{yaleblue\}}
+
+\texttt{\%the color of the lines in the diagram is defined as:}
+
+\texttt{\%\textbackslash dgcolor\{darkgray\}}
+
+\newpage{}
+
+\subsection{Examples}
+
+These two diagrams are based on real data\cite{baumann_practical_nodate}.
+
+\subsubsection{Example, Boerenboom\protect\marginpar{Farming Tree}}
+
+\medskip{}
+
+\texttt{\textbackslash begin\{tikzpicture\}{[}scale=0.6, every node/.style=\{scale=0.4\}{]}}
+
+\texttt{\textbackslash boeren\{4,4,8,7.5,7,6,5,5,4,9,7,7,6,9,7,8,5,8\}}
+
+\texttt{\textbackslash end\{tikzpicture\}}
+
+\medskip{}
+\texttt{\begin{tikzpicture}[scale=0.6, every node/.style={scale=0.4}]
+\boeren{4,4,8,7.5,7,6,5,5,4,9,7,7,6,9,7,8,5,8}
+\end{tikzpicture}}
+
+\newpage{}
+
+\subsubsection{Example, Paardenboom\protect\marginpar{Equine Tree}}
+
+\medskip{}
+
+\texttt{\textbackslash begin\{tikzpicture\}{[}scale=0.6, every node/.style=\{scale=0.4\}{]}}
+
+\texttt{\textbackslash paarden\{8,9,10,3.5,10,7,6,7,5,7,9,8,9,4,7,9.5,5,8\}}
+
+\texttt{\textbackslash end\{tikzpicture\}}
+
+\medskip{}
+
+\begin{tikzpicture}[scale=0.6, every node/.style={scale=0.4}]
+\paarden{8,9,10,3.5,10,7,6,7,5,7,9,8,9,4,7,9.5,5,8}
+\end{tikzpicture}
+
+\newpage{}
+
+\section{Cooperating Universities' Supervisors in 2026}
+
+\subsection*{Nürtingen-Geislingen NGU (Germany)}
+\begin{itemize}
+\item Prof. Dr. Heinrich Schüle
+\item Prof. Dr. Dirk Winter
+\item Prof. Dr. Alexander Wirsig
+\item Ines Maurmann (M.Sc.)
+\end{itemize}
+
+\subsection*{Van Hall Larenstein University VHL (Netherlands)}
+\begin{itemize}
+\item Prof. Dr. Linda van Haren
+\item Prof. Dr. Marije van der Wal
+\end{itemize}
+
+\subsection*{University of Zagreb UNIZG (Croatia)}
+\begin{itemize}
+\item Prof. Dr. Marija Cerijak
+\item Prof. Dr. sc. Ante Ivankovic
+\item Kristijan Bilić (M.Sc.)
+\end{itemize}
+
+\subsection*{University of Agronomic Sciences and Veterinary Medicine Bucharest
+USAMV (Romania)}
+\begin{itemize}
+\item Prof. Dr. Marius Maftei
+\end{itemize}
+
+\subsection*{30 Guest Students were from from}
+\begin{itemize}
+\item Van Hall Larenstein University VHL
+\item University of Zagreb UNIZG
+\item University of Agronomic Sciences and Veterinary Medicine Bucharest
+USAMV
+\end{itemize}
+\newpage{}
+
+\bibliographystyle{authordate1}
+\bibliography{spidergam/Spidergram}
+
+\end{document}
